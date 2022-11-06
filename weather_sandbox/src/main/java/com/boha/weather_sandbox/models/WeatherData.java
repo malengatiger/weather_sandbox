@@ -172,8 +172,6 @@ public class WeatherData {
         }
         int count = 0;
         for (HourlyPacked packed : list) {
-            LOGGER.info(E.AMP + E.AMP + E.AMP + E.AMP +
-                    " HourlyPacked: " + GSON.toJson(packed));
             LOGGER.info(E.AMP+E.AMP+
                     E.AMP+" HourlyPacked: #" + (count+1) + " "
                     + GSON.toJson(packed) + E.AMP);
