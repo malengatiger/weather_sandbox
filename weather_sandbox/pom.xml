@@ -21,30 +21,64 @@
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
+
         <dependency>
-            <groupId>com.google.cloud</groupId>
-            <artifactId>spring-cloud-gcp-starter</artifactId>
+            <groupId>org.apache.kafka</groupId>
+            <artifactId>kafka-streams</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.google.cloud</groupId>
+            <groupId>org.springframework.kafka</groupId>
+            <artifactId>spring-kafka</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.google.firebase</groupId>
+            <artifactId>firebase-admin</artifactId>
+            <version>9.1.0</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/com.squareup.okhttp/okhttp -->
+        <dependency>
+            <groupId>com.squareup.okhttp</groupId>
+            <artifactId>okhttp</artifactId>
+            <version>2.7.5</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/joda-time/joda-time -->
+        <dependency>
+            <groupId>joda-time</groupId>
+            <artifactId>joda-time</artifactId>
+            <version>2.12.1</version>
+        </dependency>
+
+        <!--        <dependency>-->
+        <!--            <groupId>com.google.cloud</groupId>-->
+        <!--            <artifactId>spring-cloud-gcp-starter</artifactId>-->
+        <!--        </dependency>-->
+        <!-- https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-gcp-starter-pubsub -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-gcp-starter-pubsub</artifactId>
+            <version>1.2.8.RELEASE</version>
         </dependency>
-        <dependency>
-            <groupId>com.google.cloud</groupId>
-            <artifactId>spring-cloud-gcp-starter-storage</artifactId>
-        </dependency>
+
+
+        <!-- https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-gcp-starter-storage -->
+        <!--        <dependency>-->
+        <!--            <groupId>org.springframework.cloud</groupId>-->
+        <!--            <artifactId>spring-cloud-gcp-starter-storage</artifactId>-->
+        <!--            <version>1.2.0.RC1</version>-->
+        <!--        </dependency>-->
+
+
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-devtools</artifactId>
             <scope>runtime</scope>
-            <optional>true</optional>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-configuration-processor</artifactId>
             <optional>true</optional>
         </dependency>
         <dependency>
@@ -57,42 +91,16 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/com.google.code.gson/gson -->
         <dependency>
-            <groupId>com.google.code.gson</groupId>
-            <artifactId>gson</artifactId>
-            <version>2.10</version>
+            <groupId>org.springframework.kafka</groupId>
+            <artifactId>spring-kafka-test</artifactId>
+            <scope>test</scope>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/com.google.firebase/firebase-admin -->
-        <dependency>
-            <groupId>com.google.firebase</groupId>
-            <artifactId>firebase-admin</artifactId>
-            <version>9.1.0</version>
-            <scope>runtime</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.squareup.okhttp</groupId>
-            <artifactId>okhttp</artifactId>
-            <version>2.7.5</version>
-        </dependency>
-        <!-- https://mvnrepository.com/artifact/joda-time/joda-time -->
-        <dependency>
-            <groupId>joda-time</groupId>
-            <artifactId>joda-time</artifactId>
-            <version>2.12.1</version>
-        </dependency>
-        <!-- https://mvnrepository.com/artifact/com.google.cloud/google-cloud-firestore -->
+        <!-- https://mvnrepository.com/artifact/com.google.cloud/google-cloud-secretmanager -->
         <dependency>
             <groupId>com.google.cloud</groupId>
-            <artifactId>google-cloud-firestore</artifactId>
-            <version>3.7.0</version>
+            <artifactId>google-cloud-secretmanager</artifactId>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/com.google.firebase/firebase-core -->
-<!--        <dependency>-->
-<!--            <groupId>com.google.firebase</groupId>-->
-<!--            <artifactId>firebase-core</artifactId>-->
-<!--&lt;!&ndash;            <version>21.1.1</version>&ndash;&gt;-->
-<!--        </dependency>-->
 
 
 
@@ -110,6 +118,13 @@
                 <groupId>com.google.cloud</groupId>
                 <artifactId>spring-cloud-gcp-dependencies</artifactId>
                 <version>${spring-cloud-gcp.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>com.google.cloud</groupId>
+                <artifactId>libraries-bom</artifactId>
+                <version>26.1.3</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
