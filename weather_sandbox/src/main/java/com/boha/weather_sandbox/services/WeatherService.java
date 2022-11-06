@@ -51,11 +51,14 @@ public class WeatherService {
         if (response.code() == 200) {
             String mResp = response.body().string();
             WeatherData weatherData = GSON.fromJson(mResp, WeatherData.class);
-            LOGGER.info("Response: " + mResp);
+            LOGGER.info(E.RED_APPLE+E.RED_APPLE+E.RED_APPLE
+                    +" Forecast Response: " + mResp
+                    + " " + E.RED_APPLE);
             return weatherData;
         } else {
-            LOGGER.info(E.RED_DOT + " Error: code: " + response.code() + " - " + response.message());
-            throw new Exception("Response code : " + response.code());
+            LOGGER.info(E.RED_DOT + E.RED_DOT + E.RED_DOT +
+                    " Forecast Error: code: " + response.code() + " - " + response.message());
+            throw new Exception("Forecast Response code : " + response.code());
         }
 
     }
