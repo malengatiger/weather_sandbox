@@ -26,19 +26,59 @@ public class KhayaController {
     @GetMapping("/")
     private String  hi() {
         LOGGER.info(E.BLUE_HEART + "Base endpoint  requested  ..." + E.BLUE_HEART);
-        return "WeatherSandboxApplication saying hi at " + new DateTime().toDateTimeISO();
+        return E.BLUE_HEART +  " WeatherSandboxApplication saying hi at "
+                + new DateTime().toDateTimeISO();
     }
     @GetMapping("/getForecasts")
-    private ResponseEntity<Object> getForecasts(@RequestParam double latitude, @RequestParam double longitude) {
+    private ResponseEntity<Object> getForecasts(@RequestParam double latitude,
+                                                @RequestParam double longitude,
+                                                @RequestParam String timeZone) {
         LOGGER.info(E.BLUE_HEART + "Forecast requested  ..." + E.BLUE_HEART);
         try {
-            WeatherData wd =  weatherService.getForecasts(latitude,longitude);
-            LOGGER.info(E.BLUE_HEART + "Forecast returned  ..." + wd.getLatitude()
-                    + " longitude: " + wd.getLongitude() + " " + E.BLUE_HEART);
+            WeatherData wd =  weatherService.getForecasts(latitude,longitude, timeZone);
+            LOGGER.info(E.BLUE_HEART + E.BLUE_HEART +E.BLUE_HEART
+                    + " Forecast for this location returned: " + wd.getLatitude()
+                    + " longitude: " + wd.getLongitude() + " " + E.LEAF
+                    +  " " + new DateTime().toDateTimeISO().toString());
             return ResponseEntity.ok(wd);
 
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(e);
         }
     }
+    @GetMapping("/getHourlyForecasts")
+    private ResponseEntity<Object> getHourlyForecasts(@RequestParam double latitude,
+                                                @RequestParam double longitude,
+                                                @RequestParam String timeZone) {
+        LOGGER.info(E.BLUE_DOT + "Daily Forecast requested  ..." + E.BLUE_HEART);
+        try {
+            WeatherData wd =  weatherService.getForecasts(latitude,longitude, timeZone);
+            LOGGER.info(E.BLUE_DOT + E.BLUE_DOT +E.BLUE_DOT
+                    + " Hourly Forecast for this location returned: " + wd.getLatitude()
+                    + " longitude: " + wd.getLongitude() + " " + E.LEAF
+                    +  " " + new DateTime().toDateTimeISO().toString());
+            return ResponseEntity.ok(wd.getHourlyPacked());
+
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e);
+        }
+    }
+    @GetMapping("/getDailyForecasts")
+    private ResponseEntity<Object> getDailyForecasts(@RequestParam double latitude,
+                                                      @RequestParam double longitude,
+                                                      @RequestParam String timeZone) {
+        LOGGER.info(E.BLUE_HEART + "Daily Forecast requested  ..." + E.BLUE_HEART);
+        try {
+            WeatherData wd =  weatherService.getForecasts(latitude,longitude, timeZone);
+            LOGGER.info(E.ORANGE_HEART + E.ORANGE_HEART +E.ORANGE_HEART
+                    + " Daily Forecast for this location returned: " + wd.getLatitude()
+                    + " longitude: " + wd.getLongitude() + " " + E.LEAF
+                    +  " " + new DateTime().toDateTimeISO().toString());
+            return ResponseEntity.ok(wd.getDaily().getDailyPacked());
+
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e);
+        }
+    }
 }
+
