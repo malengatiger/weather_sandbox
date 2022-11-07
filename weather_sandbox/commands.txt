@@ -1,26 +1,23 @@
 gsutil ls -L -b gs://aubsbucket01/
 
-
-
-
 PROJECT_ID=$(gcloud config get-value project)
 
 gcloud services enable containerregistry.googleapis.com
 
 ./mvnw compile com.google.cloud.tools:jib-maven-plugin:3.3.1:build \
-  -Dimage=gcr.io/thermal-effort-366015/datadriver
+  -Dimage=gcr.io/thermal-effort-366015/weather
 
- Built and pushed image as gcr.io/thermal-effort-366015/datadriver
+ Built and pushed image as gcr.io/thermal-effort-366015/weather
 
  gcloud services enable run.googleapis.com
 
 PROJECT_ID=$(gcloud config get-value project)
 
- gcloud run deploy datadriver \
+ gcloud run deploy weather \
    --region=europe-west1 \
    --platform=managed \
    --allow-unauthenticated \
-   --image=gcr.io/thermal-effort-366015/datadriver
+   --image=gcr.io/thermal-effort-366015/weather
 
 url is  https://datadriver-umrjnxdnuq-ew.a.run.app
 

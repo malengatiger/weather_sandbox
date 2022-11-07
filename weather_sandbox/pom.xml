@@ -13,6 +13,24 @@
     <version>0.0.1-SNAPSHOT</version>
     <name>weather_sandbox</name>
     <description>weather_sandbox</description>
+
+    <profiles>
+        <profile>
+            <id>dev</id>
+            <properties>
+                <activatedProperties>dev</activatedProperties>
+            </properties>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+        </profile>
+        <profile>
+            <id>prod</id>
+            <properties>
+                <activatedProperties>prod</activatedProperties>
+            </properties>
+        </profile>
+    </profiles>
     <properties>
         <java.version>11</java.version>
         <spring-cloud-gcp.version>3.4.0</spring-cloud-gcp.version>
