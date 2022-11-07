@@ -35,8 +35,10 @@ public class WeatherSandboxApplication implements ApplicationListener<Applicatio
             WeatherData wd = weatherService.getForecasts(-25.76,27.85, "CET");
             LOGGER.info(E.AMP+E.AMP+" Weather Data for location: "  + wd.getLatitude()
                     + " longitude: " + wd.getLongitude() + E.AMP);
-            List<HourlyPacked>  list = wd.getHourlyPacked();
+
+            List<HourlyPacked>  list = wd.getHourly().getHourlyPacked();
             LOGGER.info(E.AMP+E.AMP+" Weather Data: " + list.size() + " hourly  records");
+
             List<DailyPacked>  m = wd.getDaily().getDailyPacked();
             LOGGER.info(E.AMP+E.AMP+" Weather Data: " + m.size() + " daily records");
         } catch (Exception e) {

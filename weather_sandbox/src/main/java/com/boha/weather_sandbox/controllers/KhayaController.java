@@ -57,7 +57,7 @@ public class KhayaController {
                     + " Hourly Forecast for this location returned: " + wd.getLatitude()
                     + " longitude: " + wd.getLongitude() + " " + E.LEAF
                     +  " " + new DateTime().toDateTimeISO().toString());
-            return ResponseEntity.ok(wd.getHourlyPacked());
+            return ResponseEntity.ok(wd.getHourly().getHourlyPacked());
 
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(e);
@@ -74,6 +74,7 @@ public class KhayaController {
                     + " Daily Forecast for this location returned: " + wd.getLatitude()
                     + " longitude: " + wd.getLongitude() + " " + E.LEAF
                     +  " " + new DateTime().toDateTimeISO().toString());
+
             return ResponseEntity.ok(wd.getDaily().getDailyPacked());
 
         } catch (Exception e) {

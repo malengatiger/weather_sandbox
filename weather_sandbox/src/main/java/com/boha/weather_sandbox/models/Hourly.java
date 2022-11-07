@@ -1,8 +1,17 @@
 package com.boha.weather_sandbox.models;
 
+import com.boha.weather_sandbox.util.E;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Logger;
 
 public class Hourly {
+    private static final Logger LOGGER = Logger.getLogger(WeatherData.class.getSimpleName());
+    static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
+
     ArrayList<String> time = new ArrayList<>();
     ArrayList<Double> temperature_2m = new ArrayList<>();
     ArrayList<Integer> relativehumidity_2m = new ArrayList<>();
@@ -174,5 +183,67 @@ public class Hourly {
 
     public void setTemperature_180m(ArrayList<Double> temperature_180m) {
         this.temperature_180m = temperature_180m;
+    }
+
+    public List<HourlyPacked> getHourlyPacked() {
+        List<HourlyPacked> list = new ArrayList<>();
+        for (Double o : getTemperature_2m()) {
+            HourlyPacked hp = new HourlyPacked();
+            hp.setTemperature(o);
+            list.add(hp);
+
+        }
+        int index = 0;
+        for (Double o : getRain()) {
+            HourlyPacked hp = list.get(index);
+            hp.setRain(o);
+            index++;
+        }
+        index = 0;
+        for (Double o : getShowers()) {
+            HourlyPacked hp = list.get(index);
+            hp.setShowers(o);
+            index++;
+        }
+        index = 0;
+        for (String o : getTime()) {
+            HourlyPacked hp = list.get(index);
+            hp.setTime(o);
+            index++;
+        }
+        index = 0;
+        for (Integer o : getCloudcover()) {
+            HourlyPacked hp = list.get(index);
+            hp.setCloudCover(o);
+            index++;
+        }
+        index = 0;
+        for (Double o : getWindspeed_10m()) {
+            HourlyPacked hp = list.get(index);
+            hp.setWindSpeed(o);
+            index++;
+        }
+        index = 0;
+        for (Integer o : getRelativehumidity_2m()) {
+            HourlyPacked hp = list.get(index);
+            hp.setRelativeHumidity(o);
+            index++;
+        }
+        index = 0;
+        for (Double o : getPressure_msl()) {
+            HourlyPacked hp = list.get(index);
+            hp.setPressure(o);
+            index++;
+        }
+        int count = 0;
+        for (HourlyPacked packed : list) {
+            LOGGER.info(E.AMP+E.AMP+
+                    E.AMP+" HourlyPacked: #" + (count+1) + " "
+                    + GSON.toJson(packed) + E.AMP);
+            count++;
+
+        }
+
+        return list;
     }
 }
