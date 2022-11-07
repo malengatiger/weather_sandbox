@@ -3,6 +3,8 @@ package com.boha.weather_sandbox.models;
 import com.boha.weather_sandbox.util.E;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,7 +13,8 @@ import java.util.logging.Logger;
 public class Hourly {
     private static final Logger LOGGER = Logger.getLogger(WeatherData.class.getSimpleName());
     static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
-
+    @Autowired
+    private Environment environment;
     ArrayList<String> time = new ArrayList<>();
     ArrayList<Double> temperature_2m = new ArrayList<>();
     ArrayList<Integer> relativehumidity_2m = new ArrayList<>();
@@ -235,15 +238,8 @@ public class Hourly {
             hp.setPressure(o);
             index++;
         }
-        int count = 0;
-        for (HourlyPacked packed : list) {
-            LOGGER.info(E.AMP+E.AMP+
-                    E.AMP+" HourlyPacked: #" + (count+1) + " "
-                    + GSON.toJson(packed) + E.AMP);
-            count++;
-
-        }
 
         return list;
+
     }
 }

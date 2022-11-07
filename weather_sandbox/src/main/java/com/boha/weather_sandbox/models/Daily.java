@@ -3,11 +3,13 @@ package com.boha.weather_sandbox.models;
 import com.boha.weather_sandbox.util.E;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
-
 public class Daily {
     private static final Logger LOGGER = Logger.getLogger(Daily.class.getSimpleName());
     static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
@@ -177,7 +179,7 @@ public class Daily {
     }
 
     public List<DailyPacked> getDailyPacked() {
-        List<DailyPacked> list = new ArrayList<>();
+        List<DailyPacked> list = new ArrayList<DailyPacked>();
         for (String s : time) {
             DailyPacked m = new DailyPacked();
             m.setTime(s);
@@ -274,13 +276,9 @@ public class Daily {
             index++;
         }
 
-        int count = 0;
-        for (DailyPacked dp : list) {
-            LOGGER.info(E.RED_APPLE+E.RED_APPLE+
-                    E.RED_APPLE+" DailyPacked: #" + (count+1) + " " + GSON.toJson(dp) + E.RED_APPLE);
-            count++;
-        }
+
 
         return list;
     }
+
 }

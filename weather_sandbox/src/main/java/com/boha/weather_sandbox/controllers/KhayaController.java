@@ -69,13 +69,13 @@ public class KhayaController {
                                                       @RequestParam String timeZone) {
         LOGGER.info(E.BLUE_HEART + "Daily Forecast requested  ..." + E.BLUE_HEART);
         try {
-            WeatherData wd =  weatherService.getForecasts(latitude,longitude, timeZone);
+            WeatherData data =  weatherService.getForecasts(latitude,longitude, timeZone);
             LOGGER.info(E.ORANGE_HEART + E.ORANGE_HEART +E.ORANGE_HEART
-                    + " Daily Forecast for this location returned: " + wd.getLatitude()
-                    + " longitude: " + wd.getLongitude() + " " + E.LEAF
+                    + " Daily Forecast for this location returned: " + data.getLatitude()
+                    + " longitude: " + data.getLongitude() + " " + E.LEAF
                     +  " " + new DateTime().toDateTimeISO().toString());
 
-            return ResponseEntity.ok(wd.getDaily().getDailyPacked());
+            return ResponseEntity.ok(data.getDaily().getDailyPacked());
 
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(e);
